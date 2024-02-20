@@ -14,3 +14,5 @@ The Weird Dressing Style Generator is a fun project aimed at inspiring people to
 - Share Your Creations: Share your craziest outfit creations with friends on social media.
 - Weirdness Rating: Rate outfits based on their level of weirdness and creativity.
 - Personalized Recommendations: Receive personalized recommendations based on your style preferences and previous outfit choices.
+
+Deployed link of Render : https://educator-q4u4.onrender.com
