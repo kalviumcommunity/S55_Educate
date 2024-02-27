@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const routes = require('./routes'); // Import CRUD routes
 const app = express();
 const PORT = 3000;
 let status = "disconnected";
@@ -24,6 +25,9 @@ const stopConnect = async () => {
   console.log("Disconnected from MongoDB");
 };
 
+// Mount CRUD routes
+app.use('/', routes);
+
 app.get('/', (req, res) => {
   res.send(status);
 });
@@ -31,11 +35,6 @@ app.get('/', (req, res) => {
 app.listen(PORT, async () => {
   await startConnect(); 
   console.log(`Server is running on port ${PORT}`);
-});
-
-process.on('SIGINT', async () => {
-  await stopConnect();
-  process.exit(0);
 });
 
 module.exports = app;
