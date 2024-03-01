@@ -1,39 +1,28 @@
-// import React from 'react';
-
+import Dresss from '../assets/Dresss.jpeg'
 function Dress() {
   return (
-  <div>
-  <Navbar />
-  <div className="content">
-  <h1>Welcome to Our Website</h1>
-  <p>Find your choice here.</p>
-  </div>
-  </div>
-  );
-  }
-
-function Navbar() {
-  return (
-    <nav className="navbar">
-    <div className="container">
-    <div className="navbar-logo">
-        
+    <div>
+      <SearchBar />
+      <div className="content">
+        <h1>Welcome to WiFa</h1>
+        <p>Find your choice here.</p>
+        <div className="image-container">
+          <img src={Dresss} alt="" />
+          <div className="image-description">
+            <p>The dress is white and made of a semi-translucent material. The wearer is also sporting white sneakers for a casual touch. An elaborate gray accessory or headpiece adorns their head.</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <ul className="navbar-links">
-    </ul>
-    <SearchBar />
-
-    </div>
-    </nav>
   );
 }
+
 
 function SearchBar() {
   return (
     <div className="search-bar">
-    <input className='searchspace' type="text" placeholder="Search..." />
-    <button>Search</button>
-    
+      <input className='searchspace' type="text" placeholder="Search..." />
+      <button>Search</button>
     </div>
   );
 }
