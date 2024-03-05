@@ -7,6 +7,7 @@
   color: rgba(255, 255, 255, 0.87);
   background-image: linear-gradient(rgb(2, 2, 21),rgb(11, 11, 54), rgb(41, 41, 112), rgb(103, 91, 158),rgb(189, 180, 226));
 
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -28,6 +29,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: linear-gradient(rgb(2, 2, 21),rgb(11, 11, 54), rgb(41, 41, 112), rgb(103, 91, 158),rgb(189, 180, 226));
+  
 }
 
 h1 {
@@ -75,11 +78,6 @@ button:focus-visible {
    padding: 20px 0; 
 }
 
-.search-bar img {
-  max-width: 100px; 
-  margin-right: 10px;
-}
-
 .search-bar input[type="text"] {
   width: 200px;
   padding: 10px;
@@ -102,11 +100,6 @@ button:focus-visible {
   background-color: #0056b3; 
 }
 
-.content img {
-  max-width: 100%;
-  height: auto;
-  transition: transform 0.3s ease; }
-
 .content img:hover {
   transform: translateY(-10px);
 }
@@ -114,6 +107,7 @@ button:focus-visible {
 .image-container {
   position: relative;
   display: inline-block;
+  
 }
 
 .image-description {
@@ -121,9 +115,12 @@ button:focus-visible {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.8);
+   background-color: rgba(0, 0, 0, 0.8);
   color: white;
+  font-size: 20px;
   padding: 50px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   border-radius: 5px;
   display: none; 
 }
@@ -131,8 +128,6 @@ button:focus-visible {
 .image-container:hover .image-description {
   display: block; 
 }
-
-
 
 @media (prefers-color-scheme: light) {
   :root {

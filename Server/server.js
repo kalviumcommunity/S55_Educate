@@ -5,7 +5,8 @@ const routes = require('./routes');
 const app = express();
 const PORT = 3000;
 let status = "disconnected";
-
+var cors = require('cors');
+app.use(cors())
 dotenv.config();
 
 const startConnect = async () => {
