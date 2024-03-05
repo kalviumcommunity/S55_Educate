@@ -1,14 +1,12 @@
-const schema = require('./schema')
-const express = require('express')
-const router = express.Router()
-const mongoose = require('mongoose');
-const {Entity} = require('./schema')
+const express = require('express');
+const router = express.Router();
+const { Entity } = require('./schema');
 
-router.use(express.json())
+router.use(express.json());
 
 router.get('/get', async (req, res) => {
     try {
-        const WeirdDressingStyle = await Entity.find(); 
+        const WeirdDressingStyle = await Entity.find().maxTimeMS(20000).exec(); 
         res.json(WeirdDressingStyle); 
     } catch (err) {
         console.error('Error in GET request:', err);
@@ -29,4 +27,4 @@ router.delete('/delete',(req,res)=>{
     res.send("delete request")
 })
 
-module.exports = router
+module.exports = router;

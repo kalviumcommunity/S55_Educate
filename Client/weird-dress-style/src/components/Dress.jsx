@@ -1,5 +1,23 @@
-import Dresss from '../assets/Dresss.jpeg'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import Dresss from '../assets/Dresss.jpeg';
+
 function Dress() {
+  const [entities, setEntities] = useState([]);
+
+  useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('https://s55-educate-3.onrender.com/get');
+      setEntities(response.data);
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
+
+  fetchData();
+}, []);
+
   return (
     <div>
       <SearchBar />
@@ -8,15 +26,17 @@ function Dress() {
         <p>Find your choice here.</p>
         <div className="image-container">
           <img src={Dresss} alt="" />
-          <div className="image-description">
-            <p>The dress is white and made of a semi-translucent material. The wearer is also sporting white sneakers for a casual touch. An elaborate gray accessory or headpiece adorns their head.</p>
-          </div>
+          {entities.map(entity => (
+            <div key={entity.id} className="image-description">
+              <p>{entity.description}</p>
+              {/* Render other attributes of the entity */}
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 }
-
 
 function SearchBar() {
   return (
