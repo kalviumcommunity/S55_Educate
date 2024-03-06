@@ -1,48 +1,59 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Dresss from '../assets/Dresss.jpeg';
+
 
 function Dress() {
-  const [entities, setEntities] = useState([]);
+  const [dresses, setDresses] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('https://s55-educate-3.onrender.com/get');
-      setEntities(response.data);
-    } catch (error) {
-      console.log('Error fetching data:', error);
-    }
-  };
+    const fetchDresses = async () => {
+      try {
+        const response = await axios.get('https://s55-educate-3.onrender.com/get');
+        setDresses(response.data);
+      } catch (error) {
+        console.log('Error fetching data:', error);
+      }
+    };
 
-  fetchData();
-}, []);
+    fetchDresses();
+  }, []);
+
+  const handleSearch = () => {
+    console.log('Search term:', searchTerm);
+
+  };
 
   return (
     <div>
-      <SearchBar />
+      <div className="search-bar">
+        <input
+          className='search-space'
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button onClick={handleSearch}>Search</button>
+      </div>
       <div className="content">
         <h1>Welcome to WiFa</h1>
         <p>Find your choice here.</p>
-        <div className="image-container">
-          <img src={Dresss} alt="" />
-          {entities.map(entity => (
-            <div key={entity.id} className="image-description">
-              <p>{entity.description}</p>
-              {/* Render other attributes of the entity */}
+        <div className="dress-container">
+          {dresses && dresses.map((dress, index) => (
+            <div key={dress._id} className={`dress-card ${index === 0 ? 'first-image' : ''}`}>
+              <img src={dress.img} alt="" className="dress-image" />
+              <div className="dress-info">
+                <p>{dress.Entity}</p>
+                <p>{dress.Property1}</p>
+                <p>{dress.Property2}</p>
+                <p>{dress.Property3}</p>
+                <p>{dress.Rating}</p>
+              </div>
             </div>
           ))}
         </div>
       </div>
-    </div>
-  );
-}
-
-function SearchBar() {
-  return (
-    <div className="search-bar">
-      <input className='searchspace' type="text" placeholder="Search..." />
-      <button>Search</button>
     </div>
   );
 }

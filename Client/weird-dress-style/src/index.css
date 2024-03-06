@@ -1,143 +1,97 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-image: linear-gradient(rgb(2, 2, 21),rgb(11, 11, 54), rgb(41, 41, 112), rgb(103, 91, 158),rgb(189, 180, 226));
-
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body{
+  background-color: rgb(80, 168, 209);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
+.dress-container {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  background-image: linear-gradient(rgb(2, 2, 21),rgb(11, 11, 54), rgb(41, 41, 112), rgb(103, 91, 158),rgb(189, 180, 226));
-  
+  flex-wrap: wrap;
+  justify-content: space-between; 
+  gap: 20px;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
+.dress-card {
+  width: calc(50% - 10px); 
+  background-color: #fff;
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-
-}
-.searchspace{
-  background-color: #f9f9f9;
-  color: #000;
-  padding:10px;
-  border-radius: 5px;
-  padding-left: 120px;
-  margin-right: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-.container {
-  margin-top: 50px; 
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.dress-image {
   width: 100%;
-   padding: 20px 0; 
+  height: auto; 
+  object-fit: cover; 
 }
 
-.search-bar input[type="text"] {
-  width: 200px;
-  padding: 10px;
-  
-  border-radius: 5px;
-  outline: none;
+.dress-info {
+  padding: 20px;
 }
 
-.search-bar button {
-  padding: 10px 20px;
-  background-color: #007bff; 
-  
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+
+.dress-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; 
+  gap: 20px; 
 }
 
-.search-bar button:hover {
-  background-color: #0056b3; 
+.dress-card {
+  width: calc(50% - 10px); 
+  height: auto; 
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column; 
 }
 
-.content img:hover {
-  transform: translateY(-10px);
+.dress-image {
+  width: 100%; 
+  height: auto;
+  object-fit: cover; 
 }
 
-.image-container {
-  position: relative;
-  display: inline-block;
-  
+.dress-info {
+  padding: 20px;
 }
 
-.image-description {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-   background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  font-size: 20px;
-  padding: 50px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  border-radius: 5px;
-  display: none; 
+
+.dress-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; 
+  gap: 20px; 
 }
 
-.image-container:hover .image-description {
-  display: block; 
+.dress-card {
+  width: calc(25% - 10px); 
+  height: auto; 
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex; 
+  flex-direction: column; 
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.dress-image {
+  width: 100%; 
+  height: auto; 
+  object-fit: cover; 
+}
+
+.dress-info {
+  padding: 20px;
+}
+
+
+.dress-image {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+}
+
+.first-image .dress-image {
+  width: 150%; 
 }
