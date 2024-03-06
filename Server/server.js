@@ -2,11 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const routes = require('./routes'); 
+const cors = require('cors'); 
 const app = express();
 const PORT = 3000;
 let status = "disconnected";
-var cors = require('cors');
-app.use(cors())
+
+app.use(cors()); 
+
 dotenv.config();
 
 const startConnect = async () => {
