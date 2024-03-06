@@ -27,4 +27,16 @@ router.delete('/delete',(req,res)=>{
     res.send("delete request")
 })
 
+router.post('/add', (req,res)=>{
+    try{
+        const add = Entity.create(req.body)
+         console.log(add)
+        res.send(add)
+    }catch(err){
+        console.log(err)
+        res.send("error");
+
+    }
+})
+
 module.exports = router;
