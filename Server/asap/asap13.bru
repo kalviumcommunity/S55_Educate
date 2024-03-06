@@ -5,7 +5,16 @@ meta {
 }
 
 post {
-  url: http://localhost:3000/add-entity
-  body: none
+  url: https://s55-educate-4.onrender.com/add
+  body: json
   auth: none
+}
+
+body:json {
+  {"Entity":"Black-gown",
+   "Property1":"face covered",
+   "Property2":"full black",
+   "Property3":"long length",
+   "Rating":3,
+   "img":"https://www.hollywoodreporter.com/wp-content/uploads/2023/05/Weird-Met-Gala-Kim-Kardashian-2021-GettyImages-1340144164-EMBED-2023.jpg?w=1000"}
 }
