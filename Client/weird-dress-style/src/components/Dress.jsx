@@ -1,8 +1,7 @@
-
 import { useState, useEffect } from 'react';
+// import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
 
 function Dress() {
   const [dresses, setDresses] = useState([]);
@@ -24,15 +23,17 @@ function Dress() {
     setDresses(prevDresses => [...prevDresses, newDress]);
   };
 
-  return (
+   return (
     <div>
       <div className="content">
         <h1>Welcome to WiFa</h1>
         <p>Find your choice here.</p>
 
-        <Link to="/dressform">
+      
+      <Link to="/dressform">
           <button>Find here</button>
         </Link>
+
 
         <div className="dress-container">
           {dresses && dresses.map((dress, index) => (

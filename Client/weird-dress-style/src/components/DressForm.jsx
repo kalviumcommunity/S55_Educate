@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -21,15 +20,12 @@ function DressForm({ onNewDress }) {
   };
 
   const handleSubmit = async (e) => {
-    console.log("fd",formData)
     e.preventDefault();
     try {
-      const response = await axios.post('https://s55-educate-3.onrender.com/add', formData)
-      .then(response => console.log(response))
-      .catch((err)=>{
-        console.error(err)
-      })
-     
+      const response = await axios.post('https://s55-educate-3.onrender.com/add', formData);
+      console.log(response);
+      
+      onClickBack();
     } catch (error) {
       console.log('Error adding dress:', error);
     }
@@ -45,7 +41,8 @@ function DressForm({ onNewDress }) {
         <input type="text" name="Property3" placeholder="Property3" value={formData.Property3} onChange={handleChange} />
         <input type="number" name="Rating" placeholder="Rating" value={formData.Rating} onChange={handleChange} />
         <input type="text" name="img" placeholder="Image URL" value={formData.img} onChange={handleChange} />
-        <button type="submit">Submit</button>
+        <button type="submit" onClick={onClickBack}>Submit</button>
+  
       </form>
     </div>
   );
