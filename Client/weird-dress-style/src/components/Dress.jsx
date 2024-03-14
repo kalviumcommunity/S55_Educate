@@ -1,10 +1,11 @@
+
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
 function Dress() {
   const [dresses, setDresses] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchDresses = async () => {
@@ -19,29 +20,23 @@ function Dress() {
     fetchDresses();
   }, []);
 
-  const handleSearch = () => {
-    console.log('Search term:', searchTerm);
-
+  const handleNewDress = (newDress) => {
+    setDresses(prevDresses => [...prevDresses, newDress]);
   };
 
   return (
     <div>
-      <div className="search-bar">
-        <input
-          className='search-space'
-          type="text"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button onClick={handleSearch}>Search</button>
-      </div>
       <div className="content">
         <h1>Welcome to WiFa</h1>
         <p>Find your choice here.</p>
+
+        <Link to="/dressform">
+          <button>Find here</button>
+        </Link>
+
         <div className="dress-container">
           {dresses && dresses.map((dress, index) => (
-            <div key={dress._id} className={`dress-card ${index === 0 ? 'first-image' : ''}`}>
+            <div key={index} className={`dress-card ${index === 0 ? 'first-image' : ''}`}>
               <img src={dress.img} alt="" className="dress-image" />
               <div className="dress-info">
                 <p>{dress.Entity}</p>

@@ -1,3 +1,4 @@
+// routes.js
 const express = require('express');
 const router = express.Router();
 const { Entity } = require('./schema');
@@ -6,26 +7,23 @@ router.use(express.json());
 
 router.get('/get', async (req, res) => {
     try {
-        const WeirdDressingStyle = await Entity.find().maxTimeMS(20000).exec(); 
-        res.json(WeirdDressingStyle); 
+        const weirdDressingStyle = await Entity.find().maxTimeMS(20000).exec(); 
+        res.json(weirdDressingStyle); 
     } catch (err) {
         console.error('Error in GET request:', err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
-router.post('/post',(req,res)=>{
-    console.log(req.body)
-    res.json(req.body)
-})
-
-router.put('/put',(req,res)=>{
-    res.send("put request")
-})
-
-router.delete('/delete',(req,res)=>{
-    res.send("delete request")
-})
+router.post('/add', async (req,res) => {
+    try {
+        const newEntity = await Entity.create(req.body);
+        res.json(newEntity);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: 'Error adding entity' });
+    }
+});
 
 router.post('/add', (req,res)=>{
     try{
