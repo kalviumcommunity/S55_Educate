@@ -25,17 +25,17 @@ router.post('/add', async (req,res) => {
     }
 });
 
-router.post('/add', (req,res)=>{
-    try{
-        // res.json(req)
-        const add = Entity.create(req.body)
-        // console.log(add)
-        res.send(req.body)
-    }catch(err){
-        console.log(err)
-        res.send("error");
+// router.post('/add', (req,res)=>{
+//     try{
+//         // res.json(req)
+//         const add = Entity.create(req.body)
+//         // console.log(add)
+//         res.send(req.body)
+//     }catch(err){
+//         console.log(err)
+//         res.send("error");
 
-    }
-})
+//     }
+// })
 
 module.exports = router;
