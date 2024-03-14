@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function DressForm({ onNewDress }) {
+function DressForm({ onNewDress, onClickBack }) {
   const [formData, setFormData] = useState({
     Entity: '',
     Property1: '',
@@ -10,6 +11,9 @@ function DressForm({ onNewDress }) {
     Rating: 0,
     img: '',
   });
+
+  const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,7 +28,7 @@ function DressForm({ onNewDress }) {
     try {
       const response = await axios.post('https://s55-educate-3.onrender.com/add', formData);
       console.log(response);
-      
+      navigate('/');
       onClickBack();
     } catch (error) {
       console.log('Error adding dress:', error);
