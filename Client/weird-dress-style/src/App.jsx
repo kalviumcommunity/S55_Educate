@@ -7,15 +7,12 @@ function App() {
   
 
   return (
-    <>
-      
+    <>  
   
-              <Routes>
+           <Routes>
           <Route path="/" element={<Dress />} />
           <Route path="/dressform" element={<DressForm/>} />
-        </Routes>
-      
-    
+           </Routes>  
       
     </>
   )
