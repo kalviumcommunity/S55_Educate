@@ -4,15 +4,29 @@ const { Entity } = require('./schema');
 
 router.use(express.json());
 
+// GET all dresses
 router.get('/get', async (req, res) => {
     try {
-        const weirdDressingStyle = await Entity.find().maxTimeMS(20000).exec(); 
-        res.json(weirdDressingStyle); 
+        const dresses = await Entity.find(); 
+        res.json(dresses); 
     } catch (err) {
         console.error('Error in GET request:', err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+// POST add a new dress
+router.post('/add', async (req, res) => {
+    try {
+        const newEntity = await Entity.create(req.body);
+        res.status(201).json(newEntity);
+    } catch (err) {
+        console.error('Error adding entity:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// PUT update a dress
 router.put('/update/:id', async (req, res) => {
     try {
         const updatedEntity = await Entity.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -20,15 +34,6 @@ router.put('/update/:id', async (req, res) => {
     } catch (err) {
         console.error('Error updating entity:', err);
         res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-router.post('/add', async (req,res) => {
-    try {
-        const newEntity = await Entity.create(req.body);
-        res.json(newEntity);
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({ error: 'Error adding entity' });
     }
 });
 
