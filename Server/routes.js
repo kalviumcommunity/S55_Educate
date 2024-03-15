@@ -4,7 +4,6 @@ const { Entity } = require('./schema');
 
 router.use(express.json());
 
-// GET all dresses
 router.get('/get', async (req, res) => {
     try {
         const dresses = await Entity.find(); 
@@ -15,7 +14,7 @@ router.get('/get', async (req, res) => {
     }
 });
 
-// POST add a new dress
+
 router.post('/add', async (req, res) => {
     try {
         const newEntity = await Entity.create(req.body);
@@ -26,7 +25,7 @@ router.post('/add', async (req, res) => {
     }
 });
 
-// PUT update a dress
+
 router.put('/update/:id', async (req, res) => {
     try {
         const updatedEntity = await Entity.findByIdAndUpdate(req.params.id, req.body, { new: true });
