@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function UpdateDress() {
   const { id } = useParams();
@@ -12,11 +13,11 @@ function UpdateDress() {
     Rating: '',
     img: ''
   });
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchDress = async () => {
       try {
-        const response = await axios.get(`https://s55-educate-3.onrender.com/get/${id}`);
+        const response = await axios.get(`https://s55-educate3.onrender.com/get/${id}`);
         setDress(response.data);
       } catch (error) {
         console.log('Error fetching dress:', error);
@@ -38,7 +39,7 @@ function UpdateDress() {
     e.preventDefault();
     try {
       await axios.put(`https://s55-educate-3.onrender.com/update/${id}`, dress);
-      
+      navigate('/');
     } catch (error) {
       console.log('Error updating dress:', error);
     }
