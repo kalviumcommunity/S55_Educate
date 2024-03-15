@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -23,18 +22,24 @@ function Dress() {
     setDresses(prevDresses => [...prevDresses, newDress]);
   };
 
-   return (
+  const handleDelete = async (index) => {
+    try {
+    
+      await axios.delete(`https://s55-educate-3.onrender.com/delete/${dresses[index].id}`);
+      setDresses(prevDresses => prevDresses.filter((_, i) => i !== index));
+    } catch (error) {
+      console.log('Error deleting dress:', error);
+    }
+  };
+
+  return (
     <div>
       <div className="content">
         <h1>Welcome to WiFa</h1>
         <p>Find your choice here.</p>
-
-      
-      <Link to="/dressform">
+        <Link to="/dressform">
           <button>Find here</button>
         </Link>
-
-
         <div className="dress-container">
           {dresses && dresses.map((dress, index) => (
             <div key={index} className={`dress-card ${index === 0 ? 'first-image' : ''}`}>
@@ -45,6 +50,11 @@ function Dress() {
                 <p>{dress.Property2}</p>
                 <p>{dress.Property3}</p>
                 <p>{dress.Rating}</p>
+                <button onClick={() => handleDelete(index)}>Delete</button>
+                
+                <Link to={`/updatedress/${dress.id}`}>
+                  <button>Update</button>
+                </Link>
               </div>
             </div>
           ))}

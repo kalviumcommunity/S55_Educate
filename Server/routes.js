@@ -13,7 +13,15 @@ router.get('/get', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
+router.put('/update/:id', async (req, res) => {
+    try {
+        const updatedEntity = await Entity.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.json(updatedEntity);
+    } catch (err) {
+        console.error('Error updating entity:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 router.post('/add', async (req,res) => {
     try {
         const newEntity = await Entity.create(req.body);
