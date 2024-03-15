@@ -1,9 +1,8 @@
 body{
-  background-image:url('assets/sara-cervera-47urRDhCphA-unsplash.jpg');
+  background-color: rgb(2, 13, 31);
   background-size: cover;
-  background-repeat: no-repeat;
-  /* filter: blur(5px); */
-  color: rgb(41, 12, 70);
+  background-repeat:repeat;
+  color: rgb(224, 212, 252);
 }
 
 .dress-container {
@@ -15,10 +14,11 @@ body{
 
 .dress-card {
   width: calc(50% - 10px); 
-  background-color: #fff;
+  background-color: #000000;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  color: #000000;
 }
 
 .dress-image {
