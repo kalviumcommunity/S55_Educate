@@ -1,14 +1,31 @@
 const mongoose = require('mongoose');
 
 const EntitySchema = new mongoose.Schema({
-        Entity: String,
-        Property1: String,
-        Property2: String,
-        Property3: String,
-        Rating: Number,
-        img: String,
+    Entity: {
+        type: String,
+        required: true
+    },
+    Property1: {
+        type: String,
+        required: true
+    },
+    Property2: {
+        type: String,
+        required: true
+    },
+    Property3: {
+        type: String,
+        required: true
+    },
+    Rating: {
+        type: Number,
+        required: true,
+        min: 0,
+        max: 5
+    },
+    img: String,
 });
 
-const Entity = mongoose.model('dress-collections', EntitySchema); 
+const Entity = mongoose.model('dress-collections', EntitySchema);
 
-module.exports = {Entity};
+module.exports = { Entity };
