@@ -30,7 +30,17 @@ function Dress() {
   return (
     <div>
       <div className="content">
-        <h1>Welcome to WiFa</h1>
+        <div className="header">
+          <h1>Welcome to WiFa</h1>
+          <div className="auth-buttons">
+            <Link to="/login">
+              <button>Login</button>
+            </Link>
+            <Link to="/signup">
+              <button>Sign Up</button>
+            </Link>
+          </div>
+        </div>
         <p>Find your choice here.</p>
         <Link to="/dressform">
           <button>Find here</button>
