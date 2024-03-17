@@ -1,58 +1,66 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Signup() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const handleSignup = (e) => {
-    e.preventDefault();
-    
-    console.log('Signing up with:', name, email, password);
-  
-      };
-  
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [signupError, setSignupError] = useState('');
 
-  return (
-    <div>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSignup}>
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            if (password.length < 6) {
+                setSignupError("Password should be more than 5 characters");
+                return;
+            }
+            const response = await axios.post(`http://localhost:3000/signup`, { username, password }); // Assuming your backend is running on localhost:3000
+            if (response.status === 201) {
+                sessionStorage.setItem('login', true);
+                sessionStorage.setItem('signupSuccess', 'Signup successful');
+                console.log(response.data); // Logging user data
+                // Redirect or navigate to another page
+            } else {
+                setSignupError('Signup failed');
+            }
+        } catch (err) {
+            console.error(err);
+            setSignupError('An error occurred during the signup');
+        }
+    }
+
+    return (
         <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
+            <h2>Sign Up</h2>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="name">Username:</label>
+                    <input
+                        type="text"
+                        id="name"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="password">Password:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                {signupError && <p>{signupError}</p>}
+                <button type="submit">Sign Up</button>
+
+            </form>
+            <p>Already have an account? <Link to="/login">Login</Link></p>
         </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Sign Up</button>
-      
-      </form>
-      <p>Already have an account? <Link to="/login">Login</Link></p>
-    </div>
-  );
+    );
 }
 
 export default Signup;

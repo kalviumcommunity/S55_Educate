@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setpassword] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -32,13 +32,13 @@ function Login() {
             type="password"
             id="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setpassword(e.target.value)}
             required
           />
         </div>
         <button type="submit">Login</button>
       </form>
-      <p> Don't have an account? <Link to="/signup">Sign Up</Link></p>
+      <p> Dont have an account? <Link to="/signup">Sign Up</Link></p>
     </div>
   );
 }
