@@ -1,10 +1,10 @@
-// backend/routes.js
 const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
 const { Entity } = require('./schema');
 const { userInfo } = require('./userschema');
-const jwt = require('jsonwebtoken'); // Import jwt package
+const jwt = require('jsonwebtoken'); 
+const bcrypt = require('bcrypt');
 
 router.use(express.json());
 
@@ -90,12 +90,14 @@ router.delete('/delete/:id', async (req, res) => {
     }
 });
 
+
 router.post('/signup', async (req, res) => {
     try {
         const { username, password } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10); 
         const newUser = await userInfo.create({
             username: username,
-            password: password
+            password: hashedPassword 
         });
         res.status(201).json(newUser);
     } catch (err) {
@@ -107,18 +109,20 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
-        const user = await userInfo.findOne({ username: username, password: password });
+        const user = await userInfo.findOne({ username });
+
         if (!user) {
             return res.status(401).json({ error: 'Invalid username / password' });
+        }     
+
+        const passwordMatch = await bcrypt.compare(password, user.password); // Comparing hashed passwords
+        if (!passwordMatch) {
+            return res.status(401).json({ error: 'Invalid username / password' });
         }
-        
-      
-        const token = jwt.sign({ username: user.username }, 'your-secret-key', { expiresIn: '1h' });
-        
-       
+
+        const token = jwt.sign({ username: user.username }, 'your-secret-key', { expiresIn: '1h' });      
         res.cookie('token', token, { httpOnly: true });
-        
-        res.status(200).json({ user });
+        res.status(200).json({ token }); 
     } catch (err) {
         console.error('Error in user login:', err);
         res.status(500).json({ error: 'Internal Server Error' });

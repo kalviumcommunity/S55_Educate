@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-// Define setCookie function outside the component
 const setCookie = (name, value, days) => {
   let expires = '';
   if (days) {
@@ -22,22 +21,22 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://s55-educate-5.onrender.com/login', { username, password });
+        const response = await axios.post('https://s55-educate-5.onrender.com/login', { username, password });
+        
+        console.log('Login response:', response);
 
-      if (response.status === 200) {
-        setCookie('username', username, 365);
-        setCookie('password', password, 365);
-        sessionStorage.setItem('login', true);
-        sessionStorage.setItem('username', username);
-        // console.log('Login successful');
-        // setCookie('loggedIn', true, 1); // Set loggedIn cookie for 1 day
-        window.location.href = '/'; // Redirect to homepage
-      }
+        if (response.status === 200) {
+            const token = response.data.token; 
+            setCookie('token', token, 365); 
+            sessionStorage.setItem('login', true);
+            sessionStorage.setItem('username', username);
+            window.location.href = '/'; 
+        }
     } catch (error) {
-      console.error('Error occurred while logging in:', error);
-      setLoginError('Error occurred while logging in. Please try again.');
+        console.error('Error occurred while logging in:', error);
+        setLoginError('Error occurred while logging in. Please try again.');
     }
-  };
+};
 
   const handleLogout = async () => {
     try {
@@ -45,8 +44,8 @@ function Login() {
 
       if (response.status === 200) {
         console.log('Logout successful');
-        setCookie('loggedIn', false, -1); // Expire loggedIn cookie
-        window.location.href = '/login'; // Redirect to login page
+        setCookie('loggedIn', false, -1); 
+        window.location.href = '/login'; 
       }
     } catch (error) {
       console.error('Error logging out:', error);
