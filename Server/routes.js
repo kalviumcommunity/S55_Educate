@@ -1,8 +1,10 @@
+// backend/routes.js
 const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
 const { Entity } = require('./schema');
 const { userInfo } = require('./userschema');
+const jwt = require('jsonwebtoken'); // Import jwt package
 
 router.use(express.json());
 
@@ -52,7 +54,6 @@ router.get('/get', async (req, res) => {
     }
 });
 
-// Route to add a new entity
 router.post('/add', validateEntity, async (req, res) => {
     try {
         const newEntity = await Entity.create(req.body);
@@ -63,7 +64,6 @@ router.post('/add', validateEntity, async (req, res) => {
     }
 });
 
-// Route to update an entity by ID
 router.put('/update/:id', validateUpdateEntity, async (req, res) => {
     try {
         const updatedEntity = await Entity.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -80,7 +80,6 @@ router.put('/update/:id', validateUpdateEntity, async (req, res) => {
     }
 });
 
-// Route to delete an entity by ID
 router.delete('/delete/:id', async (req, res) => {
     try {
         await Entity.findByIdAndDelete(req.params.id);
@@ -91,7 +90,6 @@ router.delete('/delete/:id', async (req, res) => {
     }
 });
 
-// Route for user signup
 router.post('/signup', async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -106,10 +104,6 @@ router.post('/signup', async (req, res) => {
     }
 });
 
-// Route for user login
-const jwt = require('jsonwebtoken');
-
-// Route for user login
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -118,8 +112,10 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid username / password' });
         }
         
-        const token = jwt.sign({ username: user.username }, 'your-secret-key');
+      
+        const token = jwt.sign({ username: user.username }, 'your-secret-key', { expiresIn: '1h' });
         
+       
         res.cookie('token', token, { httpOnly: true });
         
         res.status(200).json({ user });
@@ -131,9 +127,7 @@ router.post('/login', async (req, res) => {
 
 router.post('/logout', (req, res) => {
     res.clearCookie('token');
-    
     res.status(200).json({ message: 'Logout successful' });
 });
-
 
 module.exports = router;

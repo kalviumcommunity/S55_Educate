@@ -11,22 +11,22 @@ function Login() {
     e.preventDefault();
     
     try {
-      const response = await axios.post('/login', { username, password });
+      const response = await axios.post('https://s55-educate-5.onrender.com/login', { username, password });
       
       if (response.status === 200) {
         console.log('Login successful');
         sessionStorage.setItem('loggedIn', true); 
-        window.location.href = '/';
+        window.location.href = '/'; 
       }
     } catch (error) {
-      console.error('Error occurred while logging in:', error);
-      setLoginError('Invalid username or password');
+      console.error('Error occurred while logging in:', error); 
+      setLoginError('Error occurred while logging in. Please try again.');
     }
   };
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post('/logout');
+      const response = await axios.post('https://s55-educate-5.onrender.com/logout');
       
       if (response.status === 200) {
         console.log('Logout successful');
@@ -65,7 +65,7 @@ function Login() {
         {loginError && <p>{loginError}</p>}
         <button type="submit">Login</button>
       </form>
-      <button onClick={handleLogout}>Logout</button> {/* Added logout button */}
+      <button onClick={handleLogout}>Logout</button> 
       <p> Don't have an account? <Link to="/signup">Sign Up</Link></p>
     </div>
   );
