@@ -4,7 +4,6 @@ const Joi = require('joi');
 const { Entity } = require('./schema');
 const { userInfo } = require('./userschema');
 const jwt = require('jsonwebtoken'); 
-const bcrypt = require('bcrypt');
 
 router.use(express.json());
 
@@ -94,10 +93,9 @@ router.delete('/delete/:id', async (req, res) => {
 router.post('/signup', async (req, res) => {
     try {
         const { username, password } = req.body;
-        const hashedPassword = await bcrypt.hash(password, 10); 
         const newUser = await userInfo.create({
             username: username,
-            password: hashedPassword 
+            password: password // Storing plain text password
         });
         res.status(201).json(newUser);
     } catch (err) {
@@ -109,20 +107,13 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
-        const user = await userInfo.findOne({ username });
+        const user = await userInfo.findOne({ username , password });
 
         if (!user) {
             return res.status(401).json({ error: 'Invalid username / password' });
-        }     
-
-        const passwordMatch = await bcrypt.compare(password, user.password); // Comparing hashed passwords
-        if (!passwordMatch) {
-            return res.status(401).json({ error: 'Invalid username / password' });
-        }
-
-        const token = jwt.sign({ username: user.username }, 'your-secret-key', { expiresIn: '1h' });      
-        res.cookie('token', token, { httpOnly: true });
-        res.status(200).json({ token }); 
+        }    
+        res.status(200).json({ user }); 
+        
     } catch (err) {
         console.error('Error in user login:', err);
         res.status(500).json({ error: 'Internal Server Error' });

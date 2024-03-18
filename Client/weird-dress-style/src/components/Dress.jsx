@@ -31,7 +31,7 @@ function Dress() {
     <div>
       <div className="content">
         <div className="header">
-          <h1>Welcome to WiFa</h1>
+          <h1>Silly Style Sphere </h1>
           <div className="auth-buttons">
             <Link to="/login">
               <button>Login</button>
@@ -43,8 +43,9 @@ function Dress() {
         </div>
         <p>Find your choice here.</p>
         <Link to="/dressform">
-          <button>Find here</button>
-        </Link>
+  <button className="button-add-more">Add more</button>
+</Link>
+
         <div className="dress-container">
           {dresses && dresses.map((dress) => (
             <div key={dress._id} className="dress-card">
