@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom'; 
 import axios from 'axios';
 
 function Signup() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [signupError, setSignupError] = useState('');
+    const [signupSuccess, setSignupSuccess] = useState(false); 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -19,6 +20,7 @@ function Signup() {
                 sessionStorage.setItem('login', true);
                 sessionStorage.setItem('signupSuccess', 'Signup successful');
                 console.log(response.data); 
+                setSignupSuccess(true); // Update signup success state
             } else {
                 setSignupError('Signup failed');
             }
@@ -26,6 +28,10 @@ function Signup() {
             console.error(err);
             setSignupError('An error occurred during the signup');
         }
+    }
+
+    if (signupSuccess) {
+        return <Navigate to="/login" />;
     }
 
     return (
