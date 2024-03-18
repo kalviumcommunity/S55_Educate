@@ -14,12 +14,11 @@ function Signup() {
                 setSignupError("Password should be more than 5 characters");
                 return;
             }
-            const response = await axios.post(`http://localhost:3000/signup`, { username, password }); // Assuming your backend is running on localhost:3000
+            const response = await axios.post(`https://s55-educate-4.onrender.com/signup`, { username, password }); // Assuming your backend is running on localhost:3000
             if (response.status === 201) {
                 sessionStorage.setItem('login', true);
                 sessionStorage.setItem('signupSuccess', 'Signup successful');
-                console.log(response.data); // Logging user data
-                // Redirect or navigate to another page
+                console.log(response.data); 
             } else {
                 setSignupError('Signup failed');
             }
