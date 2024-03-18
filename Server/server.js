@@ -9,7 +9,11 @@ let status = "disconnected";
 
 app.use(cors()); 
 
+// Load environment variables from .env file
 dotenv.config();
+
+// Access secret key from environment variables
+const secretKey = process.env.SECRET_KEY;
 
 const startConnect = async () => {
   try {
@@ -37,6 +41,7 @@ app.get('/', (req, res) => {
 app.listen(PORT, async () => {
   await startConnect(); 
   console.log(`Server is running on port ${PORT}`);
+  console.log(`Secret key: ${secretKey}`); 
 });
 
 module.exports = app;
