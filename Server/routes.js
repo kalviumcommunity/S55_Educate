@@ -109,20 +109,12 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
-        const user = await userInfo.findOne({ username });
+        const user = await userInfo.findOne({ username , password });
 
         if (!user) {
             return res.status(401).json({ error: 'Invalid username / password' });
-        }     
-
-        const passwordMatch = await bcrypt.compare(password, user.password); // Comparing hashed passwords
-        if (!passwordMatch) {
-            return res.status(401).json({ error: 'Invalid username / password' });
-        }
-
-        const token = jwt.sign({ username: user.username }, 'your-secret-key', { expiresIn: '1h' });      
-        res.cookie('token', token, { httpOnly: true });
-        res.status(200).json({ token }); 
+        }    
+        res.status(200).json({ user }); 
     } catch (err) {
         console.error('Error in user login:', err);
         res.status(500).json({ error: 'Internal Server Error' });
