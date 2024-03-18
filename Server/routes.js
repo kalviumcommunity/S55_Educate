@@ -4,7 +4,6 @@ const Joi = require('joi');
 const { Entity } = require('./schema');
 const { userInfo } = require('./userschema');
 const jwt = require('jsonwebtoken'); 
-const bcrypt = require('bcrypt');
 
 router.use(express.json());
 
@@ -94,10 +93,9 @@ router.delete('/delete/:id', async (req, res) => {
 router.post('/signup', async (req, res) => {
     try {
         const { username, password } = req.body;
-        const hashedPassword = await bcrypt.hash(password, 10); 
         const newUser = await userInfo.create({
             username: username,
-            password: hashedPassword 
+            password: password // Storing plain text password
         });
         res.status(201).json(newUser);
     } catch (err) {
@@ -115,6 +113,7 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid username / password' });
         }    
         res.status(200).json({ user }); 
+        
     } catch (err) {
         console.error('Error in user login:', err);
         res.status(500).json({ error: 'Internal Server Error' });

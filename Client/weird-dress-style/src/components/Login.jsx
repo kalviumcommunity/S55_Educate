@@ -21,13 +21,12 @@ function Login() {
     e.preventDefault();
 
     try {
-        const response = await axios.post('https://s55-educate-5.onrender.com/login', { username, password });
+        const response = await axios.post('https://s55-educate-4.onrender.com/login', { username, password });
         
         console.log('Login response:', response);
 
-        if (response.status === 200) {
-            const token = response.data.token; 
-            setCookie('token', token, 365); 
+        if (response.status === 200) { 
+            console.log(response)
             sessionStorage.setItem('login', true);
             sessionStorage.setItem('username', username);
             window.location.href = '/'; 
