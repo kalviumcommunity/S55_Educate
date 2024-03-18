@@ -2,11 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
 const { Entity } = require('./schema');
-const { userInfo } = require('./userschema'); // Import userInfo model
+const { userInfo } = require('./userschema');
 
 router.use(express.json());
 
-// Define entity schema for validation
 const entitySchema = Joi.object({
     Entity: Joi.string().required(),
     Property1: Joi.string().required(),
@@ -16,7 +15,6 @@ const entitySchema = Joi.object({
     img: Joi.string()
 });
 
-// Define schema for updating entity
 const updateEntitySchema = Joi.object({
     Entity: Joi.string(),
     Property1: Joi.string(),
@@ -26,7 +24,6 @@ const updateEntitySchema = Joi.object({
     img: Joi.string()
 }).min(1);
 
-// Middleware for validating entity creation
 const validateEntity = (req, res, next) => {
     const { error } = entitySchema.validate(req.body);
     if (error) {
@@ -36,7 +33,6 @@ const validateEntity = (req, res, next) => {
     next();
 };
 
-// Middleware for validating entity update
 const validateUpdateEntity = (req, res, next) => {
     const { error } = updateEntitySchema.validate(req.body);
     if (error) {
@@ -46,7 +42,6 @@ const validateUpdateEntity = (req, res, next) => {
     next();
 };
 
-// Route to get all entities
 router.get('/get', async (req, res) => {
     try {
         const entities = await Entity.find();
@@ -100,7 +95,6 @@ router.delete('/delete/:id', async (req, res) => {
 router.post('/signup', async (req, res) => {
     try {
         const { username, password } = req.body;
-        // Create a new user
         const newUser = await userInfo.create({
             username: username,
             password: password
@@ -113,14 +107,21 @@ router.post('/signup', async (req, res) => {
 });
 
 // Route for user login
+const jwt = require('jsonwebtoken');
+
+// Route for user login
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
-        // Find user by username and password
         const user = await userInfo.findOne({ username: username, password: password });
         if (!user) {
             return res.status(401).json({ error: 'Invalid username / password' });
         }
+        
+        const token = jwt.sign({ username: user.username }, 'your-secret-key');
+        
+        res.cookie('token', token, { httpOnly: true });
+        
         res.status(200).json({ user });
     } catch (err) {
         console.error('Error in user login:', err);
@@ -128,12 +129,11 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Route for user logout
 router.post('/logout', (req, res) => {
-    // Clear cookies or session data as per your authentication mechanism
-    res.clearCookie('username');
-    res.clearCookie('password');
+    res.clearCookie('token');
+    
     res.status(200).json({ message: 'Logout successful' });
 });
+
 
 module.exports = router;
