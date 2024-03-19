@@ -25,6 +25,10 @@ const EntitySchema = new mongoose.Schema({
         max: 5
     },
     img: String,
+    created_by: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'UserInfo' 
+    }
 });
 
 const Entity = mongoose.model('dress-collections', EntitySchema);
