@@ -4,8 +4,6 @@ import axios from 'axios';
 
 function Dress() {
   const [dresses, setDresses] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState('');
 
   useEffect(() => {
     const fetchDresses = async () => {
@@ -20,19 +18,6 @@ function Dress() {
     fetchDresses();
   }, []);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('https://s55-educate-3.onrender.com/users');
-        setUsers(response.data);
-      } catch (error) {
-        console.log('Error fetching users:', error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
-
   const handleDelete = async (id) => {
     try {
       await axios.delete(`https://s55-educate-3.onrender.com/delete/${id}`);
@@ -42,15 +27,11 @@ function Dress() {
     }
   };
 
-  const handleUserChange = (userId) => {
-    setSelectedUser(userId);
-  };
-
   return (
     <div>
       <div className="content">
         <div className="header">
-          <h1>Funny Fashion Vision</h1>
+          <h1>Funny Fashion Vision </h1>
           <div className="auth-buttons">
             <Link to="/login">
               <button>Login</button>
@@ -61,33 +42,27 @@ function Dress() {
           </div>
         </div>
         <p>Find your choice here.</p>
-        <div>
-          <select value={selectedUser} onChange={(e) => handleUserChange(e.target.value)}>
-            <option value="">All Users</option>
-            {users.map(user => (
-              <option key={user.id} value={user.id}>{user.username}</option>
-            ))}
-          </select>
-        </div>
+        <Link to="/dressform">
+  <button className="button-add-more">Add more</button>
+</Link>
+
         <div className="dress-container">
-          {dresses && dresses
-            .filter(dress => !selectedUser || dress.created_by === selectedUser)
-            .map((dress) => (
-              <div key={dress._id} className="dress-card">
-                <img src={dress.img} alt="" className="dress-image" />
-                <div className="dress-info">
-                  <p>{dress.Entity}</p>
-                  <p>{dress.Property1}</p>
-                  <p>{dress.Property2}</p>
-                  <p>{dress.Property3}</p>
-                  <p>{dress.Rating}</p>
-                  <button onClick={() => handleDelete(dress._id)}>Delete</button>
-                  <Link to={`/updatedress/${dress._id}`}>
-                    <button>Update</button>
-                  </Link>
-                </div>
+          {dresses && dresses.map((dress) => (
+            <div key={dress._id} className="dress-card">
+              <img src={dress.img} alt="" className="dress-image" />
+              <div className="dress-info">
+                <p>{dress.Entity}</p>
+                <p>{dress.Property1}</p>
+                <p>{dress.Property2}</p>
+                <p>{dress.Property3}</p>
+                <p>{dress.Rating}</p>
+                <button onClick={() => handleDelete(dress._id)}>Delete</button>
+                <Link to={`/updatedress/${dress._id}`}>
+                  <button>Update</button>
+                </Link>
               </div>
-            ))}
+            </div>
+          ))}
         </div>
       </div>
     </div>
