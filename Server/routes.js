@@ -98,16 +98,19 @@ router.delete('/delete/:id', async (req, res) => {
     }
 });
 
-router.post('/auth', async (req, res) => {
-    try {
-        const { username, password } = req.body;
-        const token = jwt.sign({ username, password }, secretKey);
-        res.cookie('token', token, { httpOnly: true });
-        res.status(200).json({ token });
-    } catch (err) {
-        console.error('Error in user authentication:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
+router.post('/auth', async(req,res) => {
+    try{const {username,password} = req.body
+    const user = {
+        "username" : username,
+        "password" : password
     }
+    const SECRET_KEY = jwt.sign(user,process.env.SECRET_KEY)
+    res.cookie('token',SECRET_KEY,{maxAge:365*24*60*60*1000})
+    res.json({"acsessToken" : SECRET_KEY})
+}catch(err){
+    console.error(err)
+    res.status(500).json({error:'Internal Server Error'})
+}
 });
 
 router.post('/signup', async (req, res) => {
