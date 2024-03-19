@@ -31,7 +31,7 @@ function Dress() {
     <div>
       <div className="content">
         <div className="header">
-          <h1>Silly Style Sphere </h1>
+          <h1>Funny Fashion Vision </h1>
           <div className="auth-buttons">
             <Link to="/login">
               <button>Login</button>
