@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
 const { Entity } = require('./schema');
-const { userInfo } = require('./userschema');
+const { UserInfo } = require('./userschema');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 
@@ -62,9 +62,12 @@ router.get('/get', async (req, res) => {
     }
 });
 
-router.post('/add', validateEntity, async (req, res) => {
+router.post('/add', async (req, res) => {
     try {
-        const newEntity = await Entity.create(req.body);
+        const newEntity = await Entity.create({
+            ...req.body,
+            created_by: req.user.id 
+        });
         res.status(201).json(newEntity);
     } catch (err) {
         console.error('Error adding entity:', err);
@@ -99,24 +102,27 @@ router.delete('/delete/:id', async (req, res) => {
 });
 
 router.post('/auth', async(req,res) => {
-    try{const {username,password} = req.body
-    const user = {
-        "username" : username,
-        "password" : password
+    try {
+        const { username, password } = req.body;
+        const user = await UserInfo.findOne({ username: username, password: password });
+
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid username / password' });
+        }
+
+        const token = jwt.sign({ id: user._id }, secretKey);
+        res.cookie('token', token, { httpOnly: true });
+        res.json({ accessToken: token });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-    const SECRET_KEY = jwt.sign(user,process.env.SECRET_KEY)
-    res.cookie('token',SECRET_KEY,{maxAge:365*24*60*60*1000})
-    res.json({"acsessToken" : SECRET_KEY})
-}catch(err){
-    console.error(err)
-    res.status(500).json({error:'Internal Server Error'})
-}
 });
 
 router.post('/signup', async (req, res) => {
     try {
         const { username, password } = req.body;
-        const newUser = await userInfo.create({
+        const newUser = await UserInfo.create({
             username: username,
             password: password
         });
@@ -130,13 +136,14 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
-        const user = await userInfo.findOne({ username: username, password: password });
+        const user = await UserInfo.findOne({ username: username, password: password });
 
         if (!user) {
             return res.status(401).json({ error: 'Invalid username / password' });
         }
-        res.status(200).json({ user });
-
+        const token = jwt.sign({ id: user._id }, secretKey);
+        res.cookie('token', token, { httpOnly: true });
+        res.json({ accessToken: token });
     } catch (err) {
         console.error('Error in user login:', err);
         res.status(500).json({ error: 'Internal Server Error' });

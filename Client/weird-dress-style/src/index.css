@@ -1,10 +1,10 @@
-body{
-  background-color:#0f000e;
-  background-size: cover;
-  background-repeat:repeat;
-  color: rgb(224, 212, 252);
+body {
+  background-image: linear-gradient(rgb(11, 0, 1),rgb(177, 109, 118),rgb(235, 172, 181));
+  background-size: cover; 
+  background-position: center; 
+  background-repeat:no-repeat; 
+  color: #00000000;
 }
-
 
 .dress-container {
   display: flex;
@@ -16,7 +16,7 @@ body{
 .dress-card {
   width: calc(50% - 10px); 
   height: auto; 
-  background-color: #fff;
+  background-color: #000000;
   border-radius: 0px;
   box-shadow: rgb(255, 255, 255);
   overflow: hidden;
