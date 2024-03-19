@@ -3,18 +3,9 @@ const router = express.Router();
 const Joi = require('joi');
 const { Entity } = require('./schema');
 const { userInfo } = require('./userschema');
-const jwt = require('jsonwebtoken');
-const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken'); 
 
 router.use(express.json());
-router.use(cookieParser());
-
-const secretKey = process.env.SECRET_KEY;
-
-const authSchema = Joi.object({
-    username: Joi.string().required(),
-    password: Joi.string().required()
-});
 
 const entitySchema = Joi.object({
     Entity: Joi.string().required(),
@@ -22,7 +13,7 @@ const entitySchema = Joi.object({
     Property2: Joi.string().required(),
     Property3: Joi.string().required(),
     Rating: Joi.number().min(0).max(5).required(),
-    img: Joi.string().allow(null, '')
+    img: Joi.string()
 });
 
 const updateEntitySchema = Joi.object({
@@ -31,7 +22,7 @@ const updateEntitySchema = Joi.object({
     Property2: Joi.string(),
     Property3: Joi.string(),
     Rating: Joi.number().min(0).max(5).allow(null),
-    img: Joi.string().allow(null, '')
+    img: Joi.string()
 }).min(1);
 
 const validateEntity = (req, res, next) => {
@@ -98,27 +89,13 @@ router.delete('/delete/:id', async (req, res) => {
     }
 });
 
-router.post('/auth', async(req,res) => {
-    try{const {username,password} = req.body
-    const user = {
-        "username" : username,
-        "password" : password
-    }
-    const SECRET_KEY = jwt.sign(user,process.env.SECRET_KEY)
-    res.cookie('token',SECRET_KEY,{maxAge:365*24*60*60*1000})
-    res.json({"acsessToken" : SECRET_KEY})
-}catch(err){
-    console.error(err)
-    res.status(500).json({error:'Internal Server Error'})
-}
-});
 
 router.post('/signup', async (req, res) => {
     try {
         const { username, password } = req.body;
         const newUser = await userInfo.create({
             username: username,
-            password: password
+            password: password 
         });
         res.status(201).json(newUser);
     } catch (err) {
@@ -130,13 +107,13 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
-        const user = await userInfo.findOne({ username: username, password: password });
+        const user = await userInfo.findOne({ username , password });
 
         if (!user) {
             return res.status(401).json({ error: 'Invalid username / password' });
-        }
-        res.status(200).json({ user });
-
+        }    
+        res.status(200).json({ user }); 
+        
     } catch (err) {
         console.error('Error in user login:', err);
         res.status(500).json({ error: 'Internal Server Error' });
