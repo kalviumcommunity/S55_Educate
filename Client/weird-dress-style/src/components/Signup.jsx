@@ -20,7 +20,7 @@ function Signup() {
                 sessionStorage.setItem('login', true);
                 sessionStorage.setItem('signupSuccess', 'Signup successful');
                 console.log(response.data); 
-                setSignupSuccess(true); // Update signup success state
+                setSignupSuccess(true); 
             } else {
                 setSignupError('Signup failed');
             }
