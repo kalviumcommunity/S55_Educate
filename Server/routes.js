@@ -22,7 +22,8 @@ const entitySchema = Joi.object({
     Property2: Joi.string().required(),
     Property3: Joi.string().required(),
     Rating: Joi.number().min(0).max(5).required(),
-    img: Joi.string().allow(null, '')
+    img: Joi.string().allow(null, ''),
+    created_by: Joi.string().required()
 });
 
 const updateEntitySchema = Joi.object({
@@ -31,7 +32,8 @@ const updateEntitySchema = Joi.object({
     Property2: Joi.string(),
     Property3: Joi.string(),
     Rating: Joi.number().min(0).max(5).allow(null),
-    img: Joi.string().allow(null, '')
+    img: Joi.string().allow(null, ''),
+    created_by: Joi.string().required()
 }).min(1);
 
 const validateEntity = (req, res, next) => {
