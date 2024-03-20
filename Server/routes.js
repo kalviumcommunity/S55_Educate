@@ -47,15 +47,13 @@ const validateUpdateEntity = (req, res, next) => {
 
 router.get('/get', async (req, res) => {
     try {
-        const username = req.user.username; 
-        const entities = await Entity.find({ created_by: username });
+        const entities = await Entity.find();
         res.json(entities);
     } catch (err) {
         console.error('Error in GET request:', err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
 
 router.post('/add', validateEntity, async (req, res) => {
     try {
