@@ -82,6 +82,7 @@ function Login() {
       <button onClick={handleLogout}>Logout</button>
       <p> Dont have an account? <Link to="/signup">Sign Up</Link></p>
     </div>
+    
   );
 }
 
