@@ -1,3 +1,4 @@
+// schema.js
 const mongoose = require('mongoose');
 const Joi = require('joi');
 
@@ -28,9 +29,9 @@ const EntitySchema = new mongoose.Schema({
         type: String
     },
     created_by:{
-        type: String
+        type: String,
+        required: true  
     } 
-    // git add
 });
 
 const Entity = mongoose.model('dress-collections', EntitySchema);

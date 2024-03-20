@@ -4,12 +4,14 @@ import axios from 'axios';
 
 function Dress() {
   const [dresses, setDresses] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDresses = async () => {
       try {
-        const response = await axios.get('https://s55-educate-3.onrender.com/get');
+        const response = await axios.get('/get'); // Assuming proxy is set up for backend routes
         setDresses(response.data);
+        setLoading(false);
       } catch (error) {
         console.log('Error fetching data:', error);
       }
@@ -20,12 +22,16 @@ function Dress() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://s55-educate-3.onrender.com/delete/${id}`);
+      await axios.delete(`/delete/${id}`); // Assuming proxy is set up for backend routes
       setDresses(prevDresses => prevDresses.filter(dress => dress._id !== id));
     } catch (error) {
       console.log('Error deleting dress:', error);
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -43,8 +49,8 @@ function Dress() {
         </div>
         <p>Find your choice here.</p>
         <Link to="/dressform">
-  <button className="button-add-more">Add more</button>
-</Link>
+          <button className="button-add-more">Add more</button>
+        </Link>
 
         <div className="dress-container">
           {dresses && dresses.map((dress) => (
@@ -56,6 +62,7 @@ function Dress() {
                 <p>{dress.Property2}</p>
                 <p>{dress.Property3}</p>
                 <p>{dress.Rating}</p>
+                <p>Created By: {dress.created_by}</p> {/* Display creator information */}
                 <button onClick={() => handleDelete(dress._id)}>Delete</button>
                 <Link to={`/updatedress/${dress._id}`}>
                   <button>Update</button>
