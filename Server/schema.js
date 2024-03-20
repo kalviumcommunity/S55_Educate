@@ -36,7 +36,8 @@ const entityJoiSchema = Joi.object({
     Property2: Joi.string().required(),
     Property3: Joi.string().required(),
     Rating: Joi.number().min(0).max(5).required(),
-    img: Joi.string()
+    img: Joi.string(),
+    created_by: Joi.string().required()
 });
 
 module.exports = { Entity, entityJoiSchema };
