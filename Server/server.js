@@ -9,10 +9,10 @@ let status = "disconnected";
 
 app.use(cors()); 
 
-// Load environment variables from .env file
+
 dotenv.config();
 
-// Access secret key from environment variables
+
 const secretKey = process.env.SECRET_KEY;
 
 const startConnect = async () => {
