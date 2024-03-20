@@ -24,8 +24,12 @@ const EntitySchema = new mongoose.Schema({
         min: 0,
         max: 5
     },
-    img: String,
-    created_by: String
+    img:{ 
+        type: String
+    },
+    created_by:{
+        type: String
+    } 
 });
 
 const Entity = mongoose.model('dress-collections', EntitySchema);
