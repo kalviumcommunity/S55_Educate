@@ -11,6 +11,7 @@ function DressForm({ onNewDress }) {
     Property3: '',
     Rating: 0,
     img: '',
+    created_by : sessionStorage.getItem('username')
   });
 
   const navigate = useNavigate();

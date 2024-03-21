@@ -80,7 +80,7 @@ function Login() {
         <button type="submit">Login</button>
       </form>
       <button onClick={handleLogout}>Logout</button>
-      <p> Dont have an account? <Link to="/signup">Sign Up</Link></p>
+      <p> Don't have an account? <Link to="/signup">Sign Up</Link></p>
     </div>
   );
 }
