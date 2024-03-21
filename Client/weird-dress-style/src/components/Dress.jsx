@@ -40,50 +40,58 @@ function Dress() {
     <div>
       <div className="content">
         <div className="header">
-          <h1>Fully Fooly Fashion </h1>
-          <div className="auth-buttons">
-            <Link to="/login">
-              <button>Login</button>
-            </Link>
-            <Link to="/signup">
-              <button>Sign Up</button>
-            </Link>
-          </div>
+          <h1>
+            Fully Fooly Fashion
+            <div className="button-group">
+              <div className="auth-buttons">
+                <Link to="/login" className="auth-link">
+                  <button><b>Login</b></button>
+                </Link>
+                <Link to="/signup" className="auth-link">
+                  <button><b>Sign Up</b></button>
+                </Link>
+              </div>
+              <div className="add-more-dropdown">
+                <Link to="/dressform">
+                  <button className="button-add-more"><b>Add more</b></button>
+                </Link>
+                {uniqueUsers.length > 1 && (
+                  <div className="dropdown-container">
+                    <select
+                      onChange={(e) => setSelectedUser(e.target.value)}
+                      value={selectedUser}
+                      className="dropdown"
+                    >
+                      {uniqueUsers.map((user) => (
+                        <option key={user} value={user}>
+                          {user}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+              </div>
+            </div>
+          </h1>
         </div>
-        <p>Find your choice here.</p>
-        <Link to="/dressform">
-          <button className="button-add-more">Add more</button>
-        </Link>
-
-        {uniqueUsers.length > 1 && (
-          <div className="dropdown-container">
-            <select
-              onChange={(e) => setSelectedUser(e.target.value)}
-              value={selectedUser}
-            >
-              {uniqueUsers.map((user) => (
-                <option key={user} value={user}>
-                  {user}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
 
         <div className="dress-container">
           {filteredDressesByUser.map((dress) => (
             <div key={dress._id} className="dress-card">
               <img src={dress.img} alt="" className="dress-image" />
-              <div className="dress-info">
+              <div className="dress-info" style={{ color: 'white' }}>
                 <p>{dress.Entity}</p>
                 <p>{dress.Property1}</p>
                 <p>{dress.Property2}</p>
                 <p>{dress.Property3}</p>
                 <p>{dress.Rating}</p>
-                <button onClick={() => handleDelete(dress._id)}>Delete</button>
-                <Link to={`/updatedress/${dress._id}`}>
-                  <button>Update</button>
-                </Link>
+                <div className="button-group">
+                  <button onClick={() => handleDelete(dress._id)}>Delete</button>
+                  <Link to={`/updatedress/${dress._id}`}>
+                  <button style={{ backgroundColor: '#085450' }}>
+                    Update</button>
+                 </Link>
+                </div>
               </div>
             </div>
           ))}

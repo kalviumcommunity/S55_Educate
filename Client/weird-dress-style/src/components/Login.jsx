@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import './EntityForm.css'; 
 
 const setCookie = (name, value, days) => {
   let expires = '';
@@ -22,21 +22,21 @@ function Login() {
     e.preventDefault();
 
     try {
-        const response = await axios.post('https://s55-educate-4.onrender.com/login', { username, password });
-        
-        console.log('Login response:', response);
+      const response = await axios.post('https://s55-educate-4.onrender.com/login', { username, password });
+      
+      console.log('Login response:', response);
 
-        if (response.status === 200) { 
-            console.log(response)
-            sessionStorage.setItem('login', true);
-            sessionStorage.setItem('username', username);
-            window.location.href = '/'; 
-        }
+      if (response.status === 200) { 
+        console.log(response)
+        sessionStorage.setItem('login', true);
+        sessionStorage.setItem('username', username);
+        window.location.href = '/'; 
+      }
     } catch (error) {
-        console.error('Error occurred while logging in:', error);
-        setLoginError('Error occurred while logging in. Please try again.');
+      console.error('Error occurred while logging in:', error);
+      setLoginError('Error occurred while logging in. Please try again.');
     }
-};
+  };
 
   const handleLogout = async () => {
     try {
@@ -53,11 +53,11 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
-          <label htmlFor="username">Username:</label>
+          <label className='text' htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
@@ -67,7 +67,7 @@ function Login() {
           />
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
+          <label className='text' htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
@@ -76,10 +76,12 @@ function Login() {
             required
           />
         </div>
-        {loginError && <p>{loginError}</p>}
-        <button type="submit">Login</button>
+        {loginError && <p className="error-message">{loginError}</p>}
+        <div className="button-container">
+          <button type="submit" className='loginbtn'>Login</button>
+          <button onClick={handleLogout}className='logoutbtn'>Logout</button>
+        </div>
       </form>
-      <button onClick={handleLogout}>Logout</button>
       <p> Don't have an account? <Link to="/signup">Sign Up</Link></p>
     </div>
   );

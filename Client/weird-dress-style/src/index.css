@@ -1,101 +1,113 @@
-body{
+body {
   background-image: url('https://images.unsplash.com/photo-1710621655731-adae9797342f?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   background-size: cover;
-  background-repeat:repeat;
-  color: rgb(224, 212, 252);
+  background-repeat: repeat;
+  color: #ffffff;
 }
-
 
 .dress-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; 
-  gap: 20px; 
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .dress-card {
-  width: calc(50% - 10px); 
-  height: auto; 
-  background-color: #fff;
-  border-radius: 0px;
-  box-shadow: rgb(255, 255, 255);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column; 
-}
-
-.dress-image {
-  width: 100%; 
+  width: calc(25% - 10px);
   height: auto;
-  object-fit: cover; 
-}
-
-.dress-info {
-  padding: 20px;
-}
-
-
-.dress-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; 
-  gap: 20px; 
-}
-
-.dress-card {
-  width: calc(25% - 10px); 
-  height: auto; 
-  background-color: #fff;
-  border-radius: 0px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  display: flex; 
-  flex-direction: column; 
-}
-
-.dress-card {
-  width: calc(25% - 10px); 
-  height: auto; 
   background-color: #041e2a;
-  border-radius: 10px; 
-  box-shadow: rgba(255, 255, 255, 0.5); 
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.5);
   overflow: hidden;
-  display: flex; 
+  display: flex;
   flex-direction: column;
   color: #ffffff; 
-  transition: background-color 0.3s ease; 
+  transition: 0.3s ease;
+  text-decoration: none;
 }
 
 .dress-card:hover {
-  background-color: #db000000; 
+  background-color: #db000000;
+  background: none;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.5);
 }
 
 .dress-image {
-  width: 100%; 
-  height: auto; 
-  object-fit: cover; 
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.dress-info p {
+  padding: 5px;
+  color: #ffffff;
+}
+
+.dress-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.dress-card {
+  width: calc(25% - 10px);
+  height: auto;
+  background-color: #fff;
+  border-radius: 0px;
+  box-shadow: 5 5 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+}
+
+.dress-card {
+  width: calc(25% - 10px);
+  height: auto;
+  background-color: #041e2a;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  transition: 0.3s ease;
+  text-decoration: none;
+}
+
+.dress-card:hover {
+  background-color: #db000000;
+  background: none;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.5);
+  
+}
+
+.dress-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 .dress-info {
   padding: 20px;
 }
 
-
 .dress-image {
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .first-image .dress-image {
-  width: 150%; 
+  width: 150%;
 }
-
 
 .auth-buttons button {
   margin-right: 10px;
   padding: 8px 16px;
-  background-color: #4CAF50; 
+  background: none;
+  box-shadow: 2px 2px 4px 2px rgba(77, 77, 77, 0.2);
   border: none;
   color: white;
   text-align: center;
@@ -106,46 +118,54 @@ body{
   cursor: pointer;
 }
 
+.auth-buttons {
+  position: absolute;
+  top: 10;
+  right: 0;
+}
+
 .auth-buttons button:hover {
-  background-color: #45a049; 
+  background-color: #170644;
 }
 
 .header h1 {
   font-size: 36px;
   font-family: Montserrat;
   font-weight: bold;
-  color: #ffffff; 
-  text-transform: uppercase; 
-  letter-spacing: 2px; 
-  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5); 
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
-
 .button-add-more {
-  margin-top: 10px;
+  margin-right: 10px;
   padding: 8px 16px;
-  background-color: #08042a; 
+  background: none;
+  box-shadow: 2px 2px 4px 2px rgba(77, 77, 77, 0.2);
   border: none;
   color: white;
   text-align: center;
   text-decoration: none;
   display: inline-block;
+
+
+
+
+
   font-size: 16px;
   transition-duration: 0.4s;
   cursor: pointer;
 }
 
 .button-add-more:hover {
-  background-color: #ccd1ff; 
+  background-color: #170644;
 }
 
-
-
-/* Style for Update and Delete buttons */
 .dress-info button {
   margin-top: 10px;
   padding: 8px 16px;
-  background-color: #f44336; /* Red */
+  background-color: #f44336; 
   border: none;
   color: white;
   text-align: center;
@@ -157,6 +177,75 @@ body{
 }
 
 .dress-info button:hover {
-  background-color: #d32f2f; 
+  background-color: #d32f2f;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.add-more-dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-container {
+
+  margin-left: auto; 
+}
+
+.dropdown {
+  padding: 8px;
+  border-radius: 5px;
+  background: none;
+  color: #ffffff;
+  background: none;
+  box-shadow: 2px 2px 4px 2px rgba(77, 77, 77, 0.2);
+  border: none;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  }
+
+.dropdown:hover {
+  background-color: #170644;
+}
+
+.dropdown option {
+  color: rgb(91, 198, 231); 
+  background: none;
+}
+
+.dropdown option:hover {
+  background-color:#170644;
+}
+
+
+
+.button-add-more {
+  background: none;
+  box-shadow: 2px 2px 4px 2px rgba(77, 77, 77, 0.2);
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button-add-more:hover {
+  background-color: #170644;
 }
 

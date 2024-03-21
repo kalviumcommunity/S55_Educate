@@ -35,11 +35,11 @@ function Signup() {
     }
 
     return (
-        <div>
+        <div className="login-container">
             <h2>Sign Up</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="name">Username:</label>
+                    <label htmlFor="name" className='text'>Username:</label>
                     <input
                         type="text"
                         id="name"
@@ -50,7 +50,7 @@ function Signup() {
                 </div>
 
                 <div>
-                    <label htmlFor="password">Password:</label>
+                    <label htmlFor="password" className='text'>Password:</label>
                     <input
                         type="password"
                         id="password"
@@ -59,11 +59,10 @@ function Signup() {
                         required
                     />
                 </div>
-                {signupError && <p>{signupError}</p>}
-                <button type="submit">Sign Up</button>
-
+                {signupError && <p className="error-message">{signupError}</p>}
+                <button className="loginbtn" type="submit">Sign Up</button>
             </form>
-            <p>Already have an account? <Link to="/login">Login</Link></p>
+            <p className="text">Already have an account? <Link to="/login">Login</Link></p>
         </div>
     );
 }

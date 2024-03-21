@@ -11,7 +11,7 @@ function DressForm({ onNewDress }) {
     Property3: '',
     Rating: 0,
     img: '',
-    created_by : sessionStorage.getItem('username')
+    created_by: sessionStorage.getItem('username')
   });
 
   const navigate = useNavigate();
@@ -36,8 +36,8 @@ function DressForm({ onNewDress }) {
   };
 
   return (
-    <div>
-      <h1>Dress Form</h1>
+    <div className="entity-form-container">
+      <h1><b>Add More Dresses</b></h1>
       <form onSubmit={handleSubmit}>
         <input type="text" name="Entity" placeholder="Entity" value={formData.Entity} onChange={handleChange} />
         <input type="text" name="Property1" placeholder="Property1" value={formData.Property1} onChange={handleChange} />
