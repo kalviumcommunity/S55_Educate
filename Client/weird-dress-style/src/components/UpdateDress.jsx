@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function UpdateDress() {
   const { id } = useParams();
@@ -14,6 +13,7 @@ function UpdateDress() {
     img: ''
   });
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchDress = async () => {
       try {
@@ -46,34 +46,34 @@ function UpdateDress() {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Update Dress</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form onSubmit={handleSubmit} className='text' style={{ padding: '20px' }}>
+        <label style={{ marginBottom: '10px' }}>
           Entity:
           <input type="text" name="Entity" value={dress.Entity} onChange={handleChange} />
         </label>
-        <label>
+        <label style={{ marginBottom: '10px' }}>
           Property1:
           <input type="text" name="Property1" value={dress.Property1} onChange={handleChange} />
         </label>
-        <label>
+        <label style={{ marginBottom: '10px' }}>
           Property2:
           <input type="text" name="Property2" value={dress.Property2} onChange={handleChange} />
         </label>
-        <label>
+        <label style={{ marginBottom: '10px' }}>
           Property3:
           <input type="text" name="Property3" value={dress.Property3} onChange={handleChange} />
         </label>
-        <label>
+        <label style={{ marginBottom: '10px' }}>
           Rating:
           <input type="text" name="Rating" value={dress.Rating} onChange={handleChange} />
         </label>
-        <label>
+        <label style={{ marginBottom: '10px' }}>
           Image URL:
           <input type="text" name="img" value={dress.img} onChange={handleChange} />
         </label>
-        <button type="submit">Update Dress</button>
+        <button className="loginbtn" type="submit">Update Dress</button>
       </form>
     </div>
   );
